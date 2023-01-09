@@ -15,7 +15,7 @@ const Logo = styled.img`
 `;
 const StyledLink = styled(NavLink)`
   color: white;
-  margin-left: 15px;
+  margin-left: 12px;
 
   &.active {
     border-bottom: 1px solid white;
@@ -24,10 +24,10 @@ const StyledLink = styled(NavLink)`
 const Login = styled.span``;
 
 const LoginName = styled.span`
-  margin-left: 15px;
+  margin-left: 12px;
 `
 const LogOutLink=styled.span`
-  margin-left: 7px;
+  margin-left: 5px;
 `
 
 function Component() {
@@ -43,7 +43,7 @@ function Component() {
         <Login>
           {
             isLogin ? <>
-                <LoginName>wm123<LogOutLink to="/register">注销</LogOutLink></LoginName>
+                <LoginName>这是用户<LogOutLink to="/register">注销</LogOutLink></LoginName>
 
               </> :
               <>
