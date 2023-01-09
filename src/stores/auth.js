@@ -1,10 +1,14 @@
-import {observable, action} from 'mobx';
+import {observable, action, makeObservable} from 'mobx';
 
 class AuthStore {
-  @observable isLogin = false;
+  constructor() {
+    makeObservable(this)
+  }
+
+  @observable isLogin  = false;
   @observable isLoading = false;
   @observable values = {
-    username: '',
+    username: '11111',
     password: ''
   };
 
@@ -21,28 +25,30 @@ class AuthStore {
   }
 
   @action login() {
-    console.log('登陆中……');
+    console.log('登录中...')
     this.isLoading = true;
     setTimeout(() => {
-      console.log('login success');
+      console.log('登录成功')
       this.isLogin = true;
       this.isLoading = false;
     }, 1000);
   }
 
   @action register() {
-    console.log('注册中……');
+    console.log('注册中...')
     this.isLoading = true;
     setTimeout(() => {
-      console.log('register success');
+      console.log('注册成功')
       this.isLogin = true;
       this.isLoading = false;
     }, 1000);
   }
 
   @action logout() {
-    console.log('注销成功');
+    console.log('已注销');
   }
+
 }
 
-export {AuthStore};
+
+export { AuthStore } ;
