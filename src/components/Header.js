@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import LogoUrl from '../icon/logo.svg';
 import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
@@ -21,8 +21,18 @@ const StyledLink = styled(NavLink)`
     border-bottom: 1px solid white;
   }
 `;
+const Login = styled.span``;
+
+const LoginName = styled.span`
+  margin-left: 15px;
+`
+const LogOutLink=styled.span`
+  margin-left: 7px;
+`
 
 function Component() {
+  const [isLogin, setIsLogin] = useState(true);
+
   return (
     <Header>
       <Logo src={LogoUrl} alt="forest"/>
@@ -30,8 +40,18 @@ function Component() {
         <StyledLink to="/" activeclassname="active" exact="true">首页</StyledLink>
         <StyledLink to="/history" activeclassname="active">上传历史</StyledLink>
         <StyledLink to="/about" activeclassname="active">关于我</StyledLink>
-        <StyledLink to="/login" activeclassname="active">登录</StyledLink>
-        <StyledLink to="/register" activeclassname="active">注册</StyledLink>
+        <Login>
+          {
+            isLogin ? <>
+                <LoginName>wm123<LogOutLink to="/register">注销</LogOutLink></LoginName>
+
+              </> :
+              <>
+              <StyledLink to="/register" activeclassname="active">注册</StyledLink>
+              <StyledLink to="/login" activeclassname="active">登录</StyledLink>
+            </>
+          }
+        </Login>
       </nav>
     </Header>
   );
