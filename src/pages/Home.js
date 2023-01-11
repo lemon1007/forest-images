@@ -1,11 +1,18 @@
 import React from 'react';
+import {observer} from 'mobx-react';
+import {useStores} from '../stores';
 
-function Component() {
+const Component = observer(() => {
+  const {UserStore} = useStores();
   return (
     <>
-      <h1>Home</h1>
+      {
+        UserStore.currentUser ?
+          <>欢迎您，用户{UserStore.currentUser.attributes.username}</> :
+          <>请登录账户</>
+      }
     </>
   );
-}
+});
 
 export default Component;

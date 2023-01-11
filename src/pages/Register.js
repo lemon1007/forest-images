@@ -1,7 +1,9 @@
 import React from 'react';
 import {useStores} from '../stores';
-import {Form, Input, Button, Checkbox} from 'antd';
+import {Form, Input, Button} from 'antd';
 import styled from 'styled-components';
+import {useNavigate} from 'react-router-dom';
+
 
 const Wraper = styled.div`
   max-width: 600px;
@@ -17,9 +19,9 @@ const Title = styled.h1`
   margin-bottom: 30px;
 `;
 
-const StyleButton =styled(Button)`
+const StyleButton = styled(Button)`
   background-color: #42b983;
-`
+`;
 
 
 const layout = {
@@ -40,21 +42,31 @@ const tailLayout = {
 
 const Component = () => {
 
+  const navigate = useNavigate();
   const {AuthStore} = useStores();
 
-  // 登录成功
+  // 注册成功
   const onFinish = values => {
     console.log('Success:', values);
+    AuthStore.setUsername(values.username);
+    AuthStore.setPassword(values.password);
+    AuthStore.register()
+      .then(() => {
+        console.log('注册成功，跳转到首页');
+        navigate('/');
+      }).catch(() => {
+      console.log('注册失败');
+    });
   };
 
-  // 登录失败
+  // 注册失败
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
 
   const validateUsername = (rule, value) => {
-    if(/\W/.test(value)) return Promise.reject('只能是字母数字下划线');
-    if(value.length < 1 || value.length > 4) return Promise.reject('长度为1～4个字符');
+    if (/\W/.test(value)) return Promise.reject('只能是字母数字下划线');
+    if (value.length < 1 || value.length > 4) return Promise.reject('长度为1～4个字符');
     return Promise.resolve();
   };
 

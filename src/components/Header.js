@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import LogoUrl from '../icon/logo.svg';
-import {NavLink} from 'react-router-dom';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
+import {useStores} from '../stores/index';
+import {observer} from 'mobx-react';
+
 
 const Header = styled.header`
   display: flex;
@@ -25,13 +28,29 @@ const Login = styled.span``;
 
 const LoginName = styled.span`
   margin-left: 12px;
-`
-const LogOutLink=styled.span`
+`;
+const LogOutLink = styled(Link)`
   margin-left: 5px;
-`
+`;
 
-function Component() {
-  const [isLogin, setIsLogin] = useState(true);
+const Component = observer(() => {
+
+  const navigate = useNavigate();
+  const {UserStore, AuthStore} = useStores();
+
+  const handleLogout = () => {
+    AuthStore.logout();
+  };
+
+  const handleLogin = () => {
+    console.log('跳转到登录页面');
+    navigate('/login');
+  };
+
+  const handleRegister = () => {
+    console.log('跳转到注册页面');
+    navigate('/register');
+  };
 
   return (
     <Header>
@@ -42,19 +61,21 @@ function Component() {
         <StyledLink to="/about" activeclassname="active">关于我</StyledLink>
         <Login>
           {
-            isLogin ? <>
-                <LoginName>这是用户<LogOutLink to="/register">注销</LogOutLink></LoginName>
+            UserStore.currentUser ? <>
+              <LoginName>
+                {UserStore.currentUser.attributes.username}
+                <LogOutLink to="/login" onClick={handleLogout}>注销</LogOutLink>
+              </LoginName>
 
-              </> :
-              <>
-              <StyledLink to="/register" activeclassname="active">注册</StyledLink>
-              <StyledLink to="/login" activeclassname="active">登录</StyledLink>
+            </> : <>
+              <StyledLink to="/login" activeclassname="active" onClick={handleLogin}>登录</StyledLink>
+              <StyledLink to="/register" activeclassname="active" onClick={handleRegister}>注册</StyledLink>
             </>
           }
         </Login>
       </nav>
     </Header>
   );
-}
+});
 
 export default Component;
