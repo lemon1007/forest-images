@@ -47,16 +47,11 @@ const Component = () => {
 
   // 注册成功
   const onFinish = values => {
-    console.log('Success:', values);
     AuthStore.setUsername(values.username);
     AuthStore.setPassword(values.password);
     AuthStore.register()
-      .then(() => {
-        console.log('注册成功，跳转到首页');
-        navigate('/');
-      }).catch(() => {
-      console.log('注册失败');
-    });
+      .then(() => {navigate('/');})
+      .catch(() => {console.log('注册失败');});
   };
 
   // 注册失败

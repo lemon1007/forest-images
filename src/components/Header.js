@@ -43,12 +43,10 @@ const Component = observer(() => {
   };
 
   const handleLogin = () => {
-    console.log('跳转到登录页面');
     navigate('/login');
   };
 
   const handleRegister = () => {
-    console.log('跳转到注册页面');
     navigate('/register');
   };
 
