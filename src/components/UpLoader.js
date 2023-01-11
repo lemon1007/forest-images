@@ -3,26 +3,28 @@ import {useStores} from '../stores';
 import {observer} from 'mobx-react';
 import {Upload} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
+import styled from 'styled-components';
 
 const {Dragger} = Upload;
+
+const Urldiv = styled.div`
+  word-wrap: break-word;
+  word-break: normal;
+  width: 300px;
+  color: red;
+  font-size: 12px;
+`;
 
 
 const Component = observer(() => {
 
-  const ref = useRef();
   const {ImageStore} = useStores();
 
   const props = {
+    showUploadList: false,
     beforeUpload: file => {
-      return false;
-    }
-  };
-
-  const bindChange = () => {
-    console.log(ref.current);
-    if (ref.current.files.length > 0) {
-      ImageStore.setFile(ref.current.files[0]);
-      ImageStore.setFilename(ref.current.files[0].name);
+      ImageStore.setFile(file);
+      ImageStore.setFilename(file.name);
       ImageStore.upload()
         .then((serverFile) => {
           console.log('上传成功');
@@ -32,15 +34,12 @@ const Component = observer(() => {
           console.log('上传失败');
           console.log(error);
         });
+      return false;
     }
-    window.file = ref.current;
   };
-
 
   return (
     <div>
-      <h3>文件上传</h3>
-      <input type="file" ref={ref} onChange={bindChange}/>
       <Dragger {...props}>
         <p className="ant-upload-drag-icon">
           <InboxOutlined/>
@@ -51,6 +50,13 @@ const Component = observer(() => {
           band files
         </p>
       </Dragger>
+      <div>
+        <h3>上传结果</h3>
+        {
+          ImageStore.serverFile ?
+            <Urldiv>{ImageStore.serverFile.attributes.url.attributes.url}</Urldiv> : null
+        }
+      </div>
     </div>
   );
 });
