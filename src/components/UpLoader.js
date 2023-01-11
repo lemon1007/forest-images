@@ -1,7 +1,7 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {useStores} from '../stores';
 import {observer} from 'mobx-react';
-import {Upload} from 'antd';
+import {Upload, message} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
 import styled from 'styled-components';
 
@@ -18,13 +18,17 @@ const Urldiv = styled.div`
 
 const Component = observer(() => {
 
-  const {ImageStore} = useStores();
+  const {ImageStore, UserStore} = useStores();
 
   const props = {
     showUploadList: false,
     beforeUpload: file => {
       ImageStore.setFile(file);
       ImageStore.setFilename(file.name);
+      if (UserStore.currentUser === null) {
+        message.warning('请先登录再上传图片！');
+        return false;
+      }
       ImageStore.upload()
         .then((serverFile) => {
           console.log('上传成功');

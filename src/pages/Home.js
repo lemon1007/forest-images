@@ -1,17 +1,12 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import {useStores} from '../stores';
 import UpLoader from '../components/UpLoader';
+import Tips from '../components/Tips';
 
 const Component = observer(() => {
-  const {UserStore} = useStores();
   return (
     <>
-      {
-        UserStore.currentUser ?
-          <>欢迎您，用户{UserStore.currentUser.attributes.username}</> :
-          <>请登录账户</>
-      }
+      <Tips>请先登录再上传图片</Tips>
       <UpLoader/>
     </>
   );
