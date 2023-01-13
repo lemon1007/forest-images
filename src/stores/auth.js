@@ -1,9 +1,13 @@
 import {observable, action, makeObservable} from 'mobx';
 import {Auth} from '../models';
 import UserStore from './user';
+import HistoryStore from './history';
+import ImageStore from './image';
 import {message} from 'antd';
 
+
 class AuthStore {
+
   constructor() {
     makeObservable(this);
   }
@@ -50,7 +54,10 @@ class AuthStore {
   }
 
   @action logout() {
+    Auth.logout();
     UserStore.resetUser();
+    HistoryStore.reset();
+    ImageStore.reset();
   }
 
 }

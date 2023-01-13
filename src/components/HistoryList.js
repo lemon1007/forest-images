@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {observer} from 'mobx-react';
 import {useStores} from '../stores';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -43,6 +43,14 @@ const Component = observer(() => {
   const loadMore = () => {
     HistoryStore.find();
   };
+
+  useEffect(() => {
+
+    return () => {
+      HistoryStore.reset();
+    };
+
+  }, []);
 
   return (
     <Wrapper>

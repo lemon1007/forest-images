@@ -56,13 +56,13 @@ const Component = observer(() => {
       <nav>
         <StyledLink to="/" activeclassname="active" exact="true">首页</StyledLink>
         <StyledLink to="/history" activeclassname="active">上传历史</StyledLink>
-        <StyledLink to="/about" activeclassname="active">关于我</StyledLink>
+        <StyledLink to="/about" activeclassname="active">关于</StyledLink>
         <Login>
           {
             UserStore.currentUser ? <>
               <LoginName>
                 {UserStore.currentUser.attributes.username}
-                <LogOutLink to="/login" onClick={handleLogout}>注销</LogOutLink>
+                <LogOutLink onClick={handleLogout}>注销</LogOutLink>
               </LoginName>
 
             </> : <>

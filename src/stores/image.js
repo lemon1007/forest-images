@@ -31,7 +31,7 @@ class ImageStore {
           resolve(serverFile);
         })
         .catch(err => {
-          message.error('上传失败')
+          message.error('上传失败');
           reject(err);
         })
         .finally(() => {
@@ -39,6 +39,12 @@ class ImageStore {
         });
     });
   }
+
+  @action reset() {
+    this.isUploading = false;
+    this.serverFile = null;
+  }
+
 }
 
 
