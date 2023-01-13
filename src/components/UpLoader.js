@@ -122,35 +122,34 @@ const Component = observer(() => {
       </Spin>
       <div>
         {
-          ImageStore.serverFile ?
-            <Wrapper>
-              <H2>上传结果</H2>
-              <dl>
-                <Dt>线上地址</Dt>
-                <Dd>
-                  <ImgUrl href={ImageStore.serverFile.attributes.url.attributes.url} target="_blank">
-                    {ImageStore.serverFile.attributes.url.attributes.url}
-                  </ImgUrl>
-                </Dd>
+          ImageStore.serverFile ? <Wrapper>
+            <H2>上传结果</H2>
+            <dl>
+              <Dt>线上地址</Dt>
+              <Dd>
+                <ImgUrl href={ImageStore.serverFile.attributes.url.attributes.url} target="_blank">
+                  {ImageStore.serverFile.attributes.url.attributes.url}
+                </ImgUrl>
+              </Dd>
 
-                <Dt>文件名</Dt>
-                <Dd>{ImageStore.serverFile.attributes.filename}</Dd>
+              <Dt>文件名</Dt>
+              <Dd>{ImageStore.serverFile.attributes.filename}</Dd>
 
-                <Dt>图片预览</Dt>
-                <Dd>
-                  <ImgShow src={ImageStore.serverFile.attributes.url.attributes.url}/>
-                </Dd>
+              <Dt>图片预览</Dt>
+              <Dd>
+                <ImgShow src={ImageStore.serverFile.attributes.url.attributes.url}/>
+              </Dd>
 
-                <Dt>更多尺寸</Dt>
-                <Dd>
-                  <Input ref={refWidth} onChange={bindWidth} placeholder="最大宽度(可选)"/>
-                  <Input ref={refHeight} onChange={bindHeight} placeholder="最大高度(可选)"/>
-                </Dd>
-                <Dd>
-                  <ImgUrl href={store.fullStr} target="_blank">{store.fullStr}</ImgUrl>
-                </Dd>
-              </dl>
-            </Wrapper> : null
+              <Dt>更多尺寸</Dt>
+              <Dd>
+                <Input ref={refWidth} onChange={bindWidth} placeholder="最大宽度(可选)"/>
+                <Input ref={refHeight} onChange={bindHeight} placeholder="最大高度(可选)"/>
+              </Dd>
+              <Dd>
+                <ImgUrl href={store.fullStr} target="_blank">{store.fullStr}</ImgUrl>
+              </Dd>
+            </dl>
+          </Wrapper> : null
         }
       </div>
     </div>
