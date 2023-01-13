@@ -28,8 +28,8 @@ class AuthStore {
           UserStore.pullUser();
           resolve(user);
         }).catch(err => {
-        message.error('登录失败');
         UserStore.resetUser();
+        message.error('登录失败');
         reject(err);
       });
     });
