@@ -18,8 +18,12 @@ const ImgUrl = styled.a`
   word-break: normal;
   max-width: 100%;
   font-size: 12px;
-  color: #42b983;
+
+  &:hover {
+    color: #42b983;
+  }
 `;
+
 const ImgShow = styled.img`
   max-width: 60%;
 `;
@@ -28,12 +32,17 @@ const H2 = styled.h2`
   text-align: center;
 `;
 const Input = styled.input`
-  border: 1px #42b983 solid;
+  border: none;
   font-size: 12px;
   padding: 5px;
   width: 120px;
+  height: 30px;
   border-radius: 10px;
   margin-right: 10px;
+
+  &:focus {
+    outline: 1px solid #42b983;
+  }
 `;
 const Dt = styled.dt`
   margin-top: 15px;

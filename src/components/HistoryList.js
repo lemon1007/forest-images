@@ -15,10 +15,21 @@ const WrapperItemImg = styled.div`
   width: 20%;
 `;
 const WrapperItemName = styled.div`
-  width: 30%;
+  width: 20%;
 `;
 const WrapperItemUrl = styled.div`
-  width: 40%;
+  width: 50%;
+`;
+const WrapperDelete = styled.div`
+  width: 10%;
+`;
+const DeleteButton = styled.button`
+  background-color: #42b983;
+  width: 60px;
+  height: 30px;
+  border-radius: 10px;
+  color: white;
+  border: none;
 `;
 const ImgShow = styled.img`
   max-width: 100%;
@@ -34,6 +45,10 @@ const ImgUrl = styled.a`
   font-size: 12px;
   word-wrap: break-word;
   word-break: normal;
+
+  &:hover {
+    color: #42b983;
+  }
 `;
 
 const Component = observer(() => {
@@ -44,12 +59,15 @@ const Component = observer(() => {
     HistoryStore.find();
   };
 
-  useEffect(() => {
+  //TODO
+  const handleDelete = () => {
 
+  };
+
+  useEffect(() => {
     return () => {
       HistoryStore.reset();
     };
-
   }, []);
 
   return (
@@ -76,6 +94,9 @@ const Component = observer(() => {
                   {item.attributes.url.attributes.url}
                 </ImgUrl>
               </WrapperItemUrl>
+              <WrapperDelete>
+                <DeleteButton onClick={handleDelete}>删除</DeleteButton>
+              </WrapperDelete>
             </List.Item>
           }
         >

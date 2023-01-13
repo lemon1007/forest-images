@@ -45,6 +45,13 @@ class HistoryStore {
     this.page = 0;
   }
 
+
+  // TODO
+  @action delete() {
+
+  }
+
+
 }
 
 
