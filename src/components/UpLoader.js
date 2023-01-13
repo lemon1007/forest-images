@@ -120,7 +120,7 @@ const Component = observer(() => {
 
   return (
     <div>
-      <Spin tip="图片上传……" spinning={ImageStore.isUploading}>
+      <Spin tip="图片上传中……" spinning={ImageStore.isUploading}>
         <Dragger {...props}>
           <p className="ant-upload-drag-icon">
             <InboxOutlined/>
