@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {useStores} from '../stores';
 import {observer, useLocalStore} from 'mobx-react';
-import {Upload, message} from 'antd';
+import {Upload, message, Spin} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
 import styled from 'styled-components';
 
@@ -111,13 +111,15 @@ const Component = observer(() => {
 
   return (
     <div>
-      <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined/>
-        </p>
-        <p className="ant-upload-text">点击或拖拽上传图片</p>
-        <p className="ant-upload-hint">仅支持.svg/.png/.jpg/.jpeg/.gif格式的图片，图片最大不能超过1M</p>
-      </Dragger>
+      <Spin tip="图片上传中……" spinning={ImageStore.isUploading}>
+        <Dragger {...props}>
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined/>
+          </p>
+          <p className="ant-upload-text">点击或拖拽上传图片</p>
+          <p className="ant-upload-hint">仅支持.svg/.png/.jpg/.jpeg/.gif格式的图片，图片最大不能超过1M</p>
+        </Dragger>
+      </Spin>
       <div>
         {
           ImageStore.serverFile ?
