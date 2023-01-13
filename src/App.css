@@ -40,20 +40,26 @@ body {
 #root {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     padding: 0;
     margin: 0;
+    /*overflow: scroll;*/
 }
 
 header {
-    min-height: 11vh;
+    height: 11vh;
 }
 
 main {
-    min-height: 80vh;
-    padding:30px 100px;
+    height: 89vh;
+    padding: 30px 100px;
+    overflow: scroll;
 }
 
-footer {
-    min-height: 9vh;
+main::-webkit-scrollbar {
+    display: none;
 }
+
+/*footer {*/
+/*    height: 9vh;*/
+/*}*/

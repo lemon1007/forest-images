@@ -1,24 +1,83 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useStores} from '../stores';
-import {observer} from 'mobx-react';
+import {observer, useLocalStore} from 'mobx-react';
 import {Upload, message} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
 import styled from 'styled-components';
 
 const {Dragger} = Upload;
 
-const Urldiv = styled.div`
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 20px;
+  border: 1px dashed #ccc;
+  margin-top: 30px;
+`;
+const ImgUrl = styled.a`
   word-wrap: break-word;
   word-break: normal;
-  width: 300px;
-  color: red;
+  max-width: 100%;
   font-size: 12px;
+  color: #42b983;
+`;
+const ImgShow = styled.img`
+  max-width: 60%;
+`;
+const H2 = styled.h2`
+  margin: 20px 0;
+  text-align: center;
+`;
+const Input = styled.input`
+  border: 1px #42b983 solid;
+  font-size: 12px;
+  padding: 5px;
+  width: 120px;
+  border-radius: 10px;
+  margin-right: 10px;
+`;
+const Dt = styled.dt`
+  margin-top: 15px;
+`;
+const Dd = styled.dd`
+  padding-top: 3px;
 `;
 
 
 const Component = observer(() => {
 
   const {ImageStore, UserStore} = useStores();
+  const refWidth = useRef();
+  const refHeight = useRef();
+  const store = useLocalStore(() => ({
+
+    width: null,
+    setWidth(width) {
+      store.width = width;
+    },
+    get widthStr() {
+      return store.width ? `/w/${store.width}` : '';
+    },
+
+    height: null,
+    setHeight(height) {
+      store.height = height;
+    },
+    get heightStr() {
+      return store.height ? `/h/${store.height}` : '';
+    },
+
+    get fullStr() {
+      return ImageStore.serverFile.attributes.url.attributes.url + '?imageView2/0' + store.widthStr + store.heightStr;
+    }
+  }));
+
+  const bindWidth = () => {
+    store.setWidth(refWidth.current.value);
+  };
+
+  const bindHeight = () => {
+    store.setHeight(refHeight.current.value);
+  };
 
   const props = {
     showUploadList: false,
@@ -55,10 +114,36 @@ const Component = observer(() => {
         </p>
       </Dragger>
       <div>
-        <h3>上传结果</h3>
         {
           ImageStore.serverFile ?
-            <Urldiv>{ImageStore.serverFile.attributes.url.attributes.url}</Urldiv> : null
+            <Wrapper>
+              <H2>上传结果</H2>
+              <dl>
+                <Dt>线上地址</Dt>
+                <Dd>
+                  <ImgUrl href={ImageStore.serverFile.attributes.url.attributes.url} target="_blank">
+                    {ImageStore.serverFile.attributes.url.attributes.url}
+                  </ImgUrl>
+                </Dd>
+
+                <Dt>文件名</Dt>
+                <Dd>{ImageStore.filename}</Dd>
+
+                <Dt>图片预览</Dt>
+                <Dd>
+                  <ImgShow src={ImageStore.serverFile.attributes.url.attributes.url}/>
+                </Dd>
+
+                <Dt>更多尺寸</Dt>
+                <Dd>
+                  <Input ref={refWidth} onChange={bindWidth} placeholder="最大宽度(可选)"/>
+                  <Input ref={refHeight} onChange={bindHeight} placeholder="最大高度(可选)"/>
+                </Dd>
+                <Dd>
+                  <ImgUrl href={store.fullStr} target="_blank">{store.fullStr}</ImgUrl>
+                </Dd>
+              </dl>
+            </Wrapper> : null
         }
       </div>
     </div>

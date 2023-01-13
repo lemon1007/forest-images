@@ -1,7 +1,12 @@
-import {observable, action} from 'mobx';
+import {observable, action, makeObservable} from 'mobx';
 import {Uploader} from '../models';
 
 class ImageStore {
+
+  constructor() {
+    makeObservable(this);
+  }
+
   @observable filename = '';
   @observable file = null;
   @observable isUploading = false;

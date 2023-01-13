@@ -26,7 +26,7 @@ function App() {
           </Routes>
         </main>
       </Suspense>
-      <Footer/>
+      {/*<Footer/>*/}
     </div>
   );
 }
