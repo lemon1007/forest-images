@@ -1,4 +1,4 @@
-import {observable, action, makeObservable} from 'mobx';
+import {observable, action, makeObservable, computed, runInAction} from 'mobx';
 import {Uploader} from '../models';
 import {message} from 'antd';
 
@@ -20,7 +20,9 @@ class HistoryStore {
   }
 
   @action find() {
-    this.isLoading = true;
+    runInAction(() => {
+      this.isLoading = true;
+    });
     Uploader.find({page: this.page, limit: this.limit})
       .then(newList => {
         this.append(newList);
@@ -33,22 +35,30 @@ class HistoryStore {
         message.error('数据加载失败');
       })
       .finally(() => {
-        this.isLoading = false;
+        runInAction(() => {
+          this.isLoading = false;
+        });
       });
   }
+
+  // TODO
+  // @action delete() {
+  //   this.isLoading = true;
+  //   Uploader.delete().then()
+  //     .catch(error => {console.log(error);})
+  //     .finally(() => [
+  //       this.isLoading = false
+  //     ]);
+  // }
 
 
   @action reset() {
     this.list = [];
-    this.isLoading = false;
     this.hasMore = true;
     this.page = 0;
-  }
-
-
-  // TODO
-  @action delete() {
-
+    runInAction(() => {
+      this.isLoading = false;
+    });
   }
 
 

@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {useStores} from '../stores';
-import {observer, useLocalStore} from 'mobx-react';
+import {observer, useLocalObservable} from 'mobx-react';
 import {Upload, message, Spin} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
 import styled from 'styled-components';
@@ -39,6 +39,7 @@ const Input = styled.input`
   height: 30px;
   border-radius: 10px;
   margin-right: 10px;
+  margin-top: 7px;
 
   &:focus {
     outline: 1px solid #42b983;
@@ -57,7 +58,7 @@ const Component = observer(() => {
   const {ImageStore, UserStore} = useStores();
   const refWidth = useRef();
   const refHeight = useRef();
-  const store = useLocalStore(() => ({
+  const store = useLocalObservable(() => ({
 
     width: null,
     setWidth(width) {
@@ -108,7 +109,6 @@ const Component = observer(() => {
       ImageStore.upload()
         .then((serverFile) => {
           console.log('上传成功');
-          console.log(serverFile);
         })
         .catch((error) => {
           console.log('上传失败');

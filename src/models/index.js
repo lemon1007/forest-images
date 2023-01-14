@@ -47,23 +47,54 @@ const Uploader = {
     item.set('owner', AV.User.current());
     item.set('url', avFile);
     return new Promise((resolve, reject) => {
-      item.save().then((serverFile) => resolve(serverFile), error => reject(error));
+      item.save().then(serverFile => resolve(serverFile), error => reject(error));
     });
   },
+
+  // TODO
+  // delete() {
+    // let item = AV.Object.createWithoutData('Image', this.data.id);
+    // return new Promise((resolve, reject) => {
+    //   item.destroy()
+    //     .then(res => {
+    //       resolve(res);
+    //       console.log('删除成功');
+    //       console.log(res.id)
+    //       return res.id
+    //     }, error => {
+    //       reject(error);
+    //       console.log('删除失败');
+    //     });
+    // });
+    // const item = AV.Object('Image');
+    // const query = AV.Query(item);
+    // query.equalTo('item', 'objectId');
+    // query.destroyAll({
+    //   success: function () {
+    //     console.log('删除成功');
+    //     console.log(this.success);
+    //   },
+    //   error: function () {
+    //     console.log('删除失败');
+    //     console.log(this.error);
+    //   }
+    // });
+  // },
 
   find(page = 0, limit = 10) {
     const query = new AV.Query('Image');
     query.include('owner');
     query.limit(limit);
     query.skip(page * limit);
-    query.descending('createdAt')
+    query.descending('createdAt');
     query.equalTo('owner', AV.User.current());
     return new Promise((resolve, reject) => {
       query.find()
         .then(results => resolve(results))
         .catch(error => reject(error));
     });
-  }
+  },
+
 };
 
 window.Uploader = Uploader;

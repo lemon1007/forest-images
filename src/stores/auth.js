@@ -1,4 +1,4 @@
-import {observable, action, makeObservable} from 'mobx';
+import {observable, action, makeObservable, computed} from 'mobx';
 import {Auth} from '../models';
 import UserStore from './user';
 import HistoryStore from './history';
