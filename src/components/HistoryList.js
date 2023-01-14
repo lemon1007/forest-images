@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {observer} from 'mobx-react';
 import {useStores} from '../stores';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -61,9 +61,7 @@ const Component = observer(() => {
     HistoryStore.find();
   };
 
-  //TODO
   const handleDelete = (oid) => {
-    console.log(oid);
     HistoryStore.delete(oid);
   };
 

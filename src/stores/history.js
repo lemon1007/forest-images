@@ -1,4 +1,4 @@
-import {observable, action, makeObservable, computed, runInAction} from 'mobx';
+import {observable, action, makeObservable} from 'mobx';
 import {Uploader} from '../models';
 import {message} from 'antd';
 
@@ -20,56 +20,38 @@ class HistoryStore {
   }
 
   @action find() {
-    runInAction(() => {
-      this.isLoading = true;
-    });
+    this.isLoading = true;
     Uploader.find({page: this.page, limit: this.limit})
       .then(newList => {
         this.append(newList);
         this.page++;
         if (newList.length < this.limit) {
-          runInAction(() => {
-            this.hasMore = false;
-          });
+          this.hasMore = false;
         }
-      })
-      .catch(error => {
-        message.error('数据加载失败');
-      })
-      .finally(() => {
-        runInAction(() => {
-          this.isLoading = false;
-        });
-      });
+      }).catch(error => {
+      message.error('加载数据失败');
+    }).finally(() => {
+      this.isLoading = false;
+    });
   }
 
-  // TODO
   @action delete(oid) {
-    console.log('这是history' + oid);
-    runInAction(() => {
-      this.isLoading = true;
-    });
-    Uploader.delete(oid).then()
+    Uploader.delete(oid)
+      .then(() => {
+        window.location.reload();
+      })
       .catch(error => {
         console.log(error);
         message.error('删除失败');
-      })
-      .finally(() => {
-          runInAction(() => {
-            this.isLoading = false;
-          });
-        }
-      );
+      });
   }
 
 
   @action reset() {
     this.list = [];
     this.page = 0;
-    runInAction(() => {
-      this.isLoading = false;
-      this.hasMore = true;
-    });
+    this.isLoading = false;
+    this.hasMore = true;
   }
 
 

@@ -1,4 +1,4 @@
-import {observable, action, makeObservable, computed, runInAction} from 'mobx';
+import {observable, action, makeObservable} from 'mobx';
 import {Uploader} from '../models';
 import {message} from 'antd';
 
@@ -22,16 +22,12 @@ class ImageStore {
   }
 
   @action upload() {
-    runInAction(() => {
-      this.isUploading = true;
-      this.serverFile = null;
-    });
+    this.isUploading = true;
+    this.serverFile = null;
     return new Promise((resolve, reject) => {
       Uploader.add(this.file, this.filename)
         .then(serverFile => {
-          runInAction(() => {
-            this.serverFile = serverFile;
-          });
+          this.serverFile = serverFile;
           resolve(serverFile);
         })
         .catch(err => {
@@ -39,18 +35,14 @@ class ImageStore {
           reject(err);
         })
         .finally(() => {
-          runInAction(() => {
-            this.isUploading = false;
-          });
+          this.isUploading = false;
         });
     });
   }
 
   @action reset() {
-    runInAction(() => {
-      this.isUploading = false;
-      this.serverFile = null;
-    });
+    this.isUploading = false;
+    this.serverFile = null;
   }
 
 }

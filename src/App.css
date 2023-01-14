@@ -56,9 +56,9 @@ main {
     overflow: scroll;
 }
 
-main::-webkit-scrollbar {
-    display: none;
-}
+/*main::-webkit-scrollbar {*/
+/*    display: none;*/
+/*}*/
 
 /*footer {*/
 /*    height: 9vh;*/
