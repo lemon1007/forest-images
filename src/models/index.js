@@ -35,7 +35,7 @@ const Auth = {
   // 获取当前用户信息
   getCurrentUser() {
     return User.current();
-  }
+  },
 
 };
 
@@ -51,35 +51,16 @@ const Uploader = {
     });
   },
 
+  // Uploader.find({page:0,limit:10}).then(data=>console.log(data))
+
   // TODO
-  // delete() {
-    // let item = AV.Object.createWithoutData('Image', this.data.id);
-    // return new Promise((resolve, reject) => {
-    //   item.destroy()
-    //     .then(res => {
-    //       resolve(res);
-    //       console.log('删除成功');
-    //       console.log(res.id)
-    //       return res.id
-    //     }, error => {
-    //       reject(error);
-    //       console.log('删除失败');
-    //     });
-    // });
-    // const item = AV.Object('Image');
-    // const query = AV.Query(item);
-    // query.equalTo('item', 'objectId');
-    // query.destroyAll({
-    //   success: function () {
-    //     console.log('删除成功');
-    //     console.log(this.success);
-    //   },
-    //   error: function () {
-    //     console.log('删除失败');
-    //     console.log(this.error);
-    //   }
-    // });
-  // },
+  delete() {
+    // 如何从 HistoryList 获取当前 image 的 objectId
+    const image = AV.Object.createWithoutData('Image', 'objectId');
+    return new Promise((resolve, reject) => {
+      image.destroy().then(res => resolve(res), error => reject(error));
+    });
+  },
 
   find(page = 0, limit = 10) {
     const query = new AV.Query('Image');

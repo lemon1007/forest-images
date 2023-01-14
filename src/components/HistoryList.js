@@ -61,7 +61,7 @@ const Component = observer(() => {
 
   //TODO
   const handleDelete = () => {
-    // HistoryStore.delete();
+    HistoryStore.delete();
   };
 
   useEffect(() => {

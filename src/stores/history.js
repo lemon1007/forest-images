@@ -28,7 +28,9 @@ class HistoryStore {
         this.append(newList);
         this.page++;
         if (newList.length < this.limit) {
-          this.hasMore = false;
+          runInAction(() => {
+            this.hasMore = false;
+          });
         }
       })
       .catch(error => {
@@ -42,22 +44,27 @@ class HistoryStore {
   }
 
   // TODO
-  // @action delete() {
-  //   this.isLoading = true;
-  //   Uploader.delete().then()
-  //     .catch(error => {console.log(error);})
-  //     .finally(() => [
-  //       this.isLoading = false
-  //     ]);
-  // }
+  @action delete() {
+    runInAction(() => {
+      this.isLoading = true;
+    });
+    Uploader.delete().then()
+      .catch(error => {console.log(error);})
+      .finally(() => {
+          runInAction(() => {
+            this.isLoading = false;
+          });
+        }
+      );
+  }
 
 
   @action reset() {
     this.list = [];
-    this.hasMore = true;
     this.page = 0;
     runInAction(() => {
       this.isLoading = false;
+      this.hasMore = true;
     });
   }
 
