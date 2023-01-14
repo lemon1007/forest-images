@@ -52,11 +52,13 @@ const Uploader = {
   },
 
   // TODO
-  delete() {
+  delete(oid) {
     // 如何从 HistoryList 获取当前 image 的 objectId (?)
-    const image = AV.Object.createWithoutData('Image', 'objectId');
+    console.log('这是index' + oid);
+    const image = AV.Object.createWithoutData('Image', oid);
     return new Promise((resolve, reject) => {
-      image.destroy().then(res => resolve(res), error => reject(error));
+      image.destroy()
+        .then(res => resolve(res), error => reject(error));
     });
   },
 

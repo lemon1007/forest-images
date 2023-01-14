@@ -55,5 +55,4 @@ class ImageStore {
 
 }
 
-
 export default new ImageStore();

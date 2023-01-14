@@ -44,11 +44,12 @@ class HistoryStore {
   }
 
   // TODO
-  @action delete() {
+  @action delete(oid) {
+    console.log('这是history' + oid);
     runInAction(() => {
       this.isLoading = true;
     });
-    Uploader.delete().then()
+    Uploader.delete(oid).then()
       .catch(error => {
         console.log(error);
         message.error('删除失败');

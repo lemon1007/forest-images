@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {observer} from 'mobx-react';
 import {useStores} from '../stores';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -28,8 +28,10 @@ const DeleteButton = styled.button`
   width: 60px;
   height: 30px;
   border-radius: 10px;
-  color: white;
+  //color: white;
   border: none;
+  word-wrap: break-word;
+  word-break: normal;
 `;
 const ImgShow = styled.img`
   max-width: 100%;
@@ -60,8 +62,9 @@ const Component = observer(() => {
   };
 
   //TODO
-  const handleDelete = () => {
-    HistoryStore.delete();
+  const handleDelete = (oid) => {
+    console.log(oid);
+    HistoryStore.delete(oid);
   };
 
   useEffect(() => {
@@ -95,7 +98,7 @@ const Component = observer(() => {
                 </ImgUrl>
               </WrapperItemUrl>
               <WrapperDelete>
-                <DeleteButton onClick={handleDelete}>删除</DeleteButton>
+                <DeleteButton onClick={() => handleDelete(item.id)}>删除{item.id}</DeleteButton>
               </WrapperDelete>
             </List.Item>
           }
