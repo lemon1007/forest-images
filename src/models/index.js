@@ -51,11 +51,9 @@ const Uploader = {
     });
   },
 
-  // Uploader.find({page:0,limit:10}).then(data=>console.log(data))
-
   // TODO
   delete() {
-    // 如何从 HistoryList 获取当前 image 的 objectId
+    // 如何从 HistoryList 获取当前 image 的 objectId (?)
     const image = AV.Object.createWithoutData('Image', 'objectId');
     return new Promise((resolve, reject) => {
       image.destroy().then(res => resolve(res), error => reject(error));
