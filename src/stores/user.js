@@ -5,6 +5,7 @@ class UserStore {
 
   constructor() {
     makeObservable(this);
+    this.pullUser();
   }
 
   @observable currentUser = null;

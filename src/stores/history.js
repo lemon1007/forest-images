@@ -49,7 +49,10 @@ class HistoryStore {
       this.isLoading = true;
     });
     Uploader.delete().then()
-      .catch(error => {console.log(error);})
+      .catch(error => {
+        console.log(error);
+        message.error('删除失败');
+      })
       .finally(() => {
           runInAction(() => {
             this.isLoading = false;
