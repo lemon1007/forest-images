@@ -48,12 +48,18 @@ body {
 
 header {
     height: 11vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 16;
 }
 
 main {
     height: 89vh;
     padding: 30px 100px;
-    overflow: scroll;
+    margin-top: 11vh;
+    z-index: 8;
 }
 
 /*main::-webkit-scrollbar {*/

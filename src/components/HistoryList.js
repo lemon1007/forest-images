@@ -28,10 +28,8 @@ const DeleteButton = styled.button`
   width: 60px;
   height: 30px;
   border-radius: 10px;
-  //color: white;
+  color: white;
   border: none;
-  word-wrap: break-word;
-  word-break: normal;
 `;
 const ImgShow = styled.img`
   max-width: 100%;
@@ -96,7 +94,7 @@ const Component = observer(() => {
                 </ImgUrl>
               </WrapperItemUrl>
               <WrapperDelete>
-                <DeleteButton onClick={() => handleDelete(item.id)}>删除{item.id}</DeleteButton>
+                <DeleteButton onClick={() => handleDelete(item.id)}>删除</DeleteButton>
               </WrapperDelete>
             </List.Item>
           }
