@@ -14,7 +14,6 @@ class HistoryStore {
   @observable page = 0;
   limit = 10;
 
-
   @action append(newList) {
     this.list = this.list.concat(newList);
   }
@@ -52,7 +51,6 @@ class HistoryStore {
       });
   }
 
-
   @action reset() {
     this.list = [];
     this.page = 0;
@@ -61,7 +59,6 @@ class HistoryStore {
       this.hasMore = true;
     });
   }
-
 
 }
 

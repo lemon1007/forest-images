@@ -47,7 +47,7 @@ body {
 }
 
 header {
-    height: 11vh;
+    height: 10vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -56,16 +56,15 @@ header {
 }
 
 main {
-    height: 89vh;
-    padding: 30px 100px;
-    margin-top: 11vh;
+    padding: 30px 50px;
+    margin-top: 10vh;
     z-index: 8;
 }
 
-/*main::-webkit-scrollbar {*/
-/*    display: none;*/
-/*}*/
+.ant-btn-primary:hover {
+    background-color: #42b983;
+}
 
-/*footer {*/
-/*    height: 9vh;*/
-/*}*/
+.ant-list-item > li {
+    border-bottom: 1px dashed #42b983;
+}

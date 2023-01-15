@@ -1,11 +1,19 @@
 import React from 'react';
 import HistoryList from '../components/HistoryList';
+import styled from 'styled-components';
+
+
+const H2 = styled.h2`
+  margin-bottom:20px;
+  color: #42b983;
+  font-weight: 800;
+`
 
 
 function History() {
   return (
     <>
-      <h1 style={{margin:"0 0 20px 0"}}>上传记录</h1>
+      <H2>上传记录</H2>
       <HistoryList/>
     </>
   );

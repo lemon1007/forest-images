@@ -7,27 +7,31 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
-  border: 1px dashed #ccc;
+  border: 1px dashed #42b983;;
   border-radius: 10px;
   text-align: center;
 `;
 const WrapperItemImg = styled.div`
   width: 20%;
+  padding: 10px;
 `;
 const WrapperItemName = styled.div`
   width: 20%;
+  padding: 10px;
 `;
 const WrapperItemUrl = styled.div`
   width: 50%;
+  padding: 10px;
 `;
 const WrapperDelete = styled.div`
   width: 10%;
 `;
 const DeleteButton = styled.button`
   background-color: #42b983;
-  width: 60px;
-  height: 30px;
-  border-radius: 10px;
+  font-size: 12px;
+  width: 70%;
+  height: 40px;
+  border-radius: 15px;
   color: white;
   border: none;
 `;
@@ -39,15 +43,17 @@ const H5 = styled.h5`
   max-width: 100%;
   word-wrap: break-word;
   word-break: normal;
+  color: #42b983;
 `;
 const ImgUrl = styled.a`
   max-width: 100%;
   font-size: 12px;
   word-wrap: break-word;
   word-break: normal;
+  color: #42b983;
 
   &:hover {
-    color: #42b983;
+    color: #5edaa1;
   }
 `;
 

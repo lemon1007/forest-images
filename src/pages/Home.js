@@ -6,7 +6,7 @@ import Tips from '../components/Tips';
 const Component = observer(() => {
   return (
     <>
-      <Tips>请先登录再上传图片</Tips>
+      <Tips>提示:请先登录再上传图片</Tips>
       <UpLoader/>
     </>
   );

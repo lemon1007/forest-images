@@ -9,9 +9,10 @@ const {Dragger} = Upload;
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 20px;
-  border: 1px dashed #ccc;
+  padding: 0 20px 20px 20px;
+  border: 1px dashed #42b983;
   margin-top: 30px;
+  border-radius: 10px;
 `;
 const ImgUrl = styled.a`
   word-wrap: break-word;
@@ -20,16 +21,20 @@ const ImgUrl = styled.a`
   font-size: 12px;
 
   &:hover {
-    color: #42b983;
+    color: #5edaa1;
   }
 `;
 
 const ImgShow = styled.img`
-  max-width: 60%;
+  max-width: 50%;
 `;
 const H2 = styled.h2`
   margin: 20px 0;
   text-align: center;
+  color: #42b983;
+  font-weight: 800;
+  width: 107.5%;
+
 `;
 const Input = styled.input`
   border: none;
@@ -47,9 +52,19 @@ const Input = styled.input`
 `;
 const Dt = styled.dt`
   margin-top: 15px;
+  font-weight: 600;
+  color: #42b983;
+
 `;
 const Dd = styled.dd`
   padding-top: 3px;
+  color: #42b983;
+`;
+
+const StyledInboxOutlined = styled(InboxOutlined)`
+  svg {
+    fill: #42b983;
+  }
 `;
 
 
@@ -123,10 +138,13 @@ const Component = observer(() => {
       <Spin tip="图片上传中……" spinning={ImageStore.isUploading}>
         <Dragger {...props}>
           <p className="ant-upload-drag-icon">
-            <InboxOutlined/>
+            <StyledInboxOutlined/>
           </p>
-          <p className="ant-upload-text">点击或拖拽上传图片</p>
-          <p className="ant-upload-hint">仅支持.svg/.png/.jpg/.jpeg/.gif格式的图片，图片最大不能超过1M</p>
+          <p className="ant-upload-text" style={{color: '#42b983'}}>点击或拖拽上传图片</p>
+          <p className="ant-upload-hint" style={{
+            fontSize: '12px',
+            padding: '10px'
+          }}>仅支持.svg/.png/.jpg/.jpeg/.gif格式的图片，图片最大不能超过1M</p>
         </Dragger>
       </Spin>
       <div>
@@ -134,22 +152,22 @@ const Component = observer(() => {
           ImageStore.serverFile ? <Wrapper>
             <H2>上传结果</H2>
             <dl>
-              <Dt>线上地址</Dt>
+              <Dt>线上地址:</Dt>
               <Dd>
                 <ImgUrl href={ImageStore.serverFile.attributes.url.attributes.url} target="_blank">
                   {ImageStore.serverFile.attributes.url.attributes.url}
                 </ImgUrl>
               </Dd>
 
-              <Dt>文件名</Dt>
+              <Dt>文件名:</Dt>
               <Dd>{ImageStore.serverFile.attributes.filename}</Dd>
 
-              <Dt>图片预览</Dt>
+              <Dt>图片预览:</Dt>
               <Dd>
                 <ImgShow src={ImageStore.serverFile.attributes.url.attributes.url}/>
               </Dd>
 
-              <Dt>更多尺寸</Dt>
+              <Dt>尺寸定制:</Dt>
               <Dd>
                 <Input ref={refWidth} onChange={bindWidth} placeholder="最大宽度(可选)"/>
                 <Input ref={refHeight} onChange={bindHeight} placeholder="最大高度(可选)"/>

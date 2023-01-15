@@ -5,13 +5,10 @@ import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
 
 
-const Wraper = styled.div`
-  max-width: 600px;
+const Wrapper = styled.div`
+  max-width: 500px;
   margin: auto;
-  //box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
-  //border-radius: 4px;
   padding: 20px;
-  //background-color: white;
 `;
 
 const Title = styled.h1`
@@ -21,23 +18,25 @@ const Title = styled.h1`
 
 const StyleButton = styled(Button)`
   background-color: #42b983;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 15px;
 `;
 
-
-const layout = {
-  labelCol: {
-    span: 6,
-  },
-  wrapperCol: {
-    span: 18,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 6,
-    span: 18,
-  },
-};
+// const layout = {
+//   labelCol: {
+//     span: 4,
+//   },
+//   wrapperCol: {
+//     span: 18,
+//   },
+// };
+// const tailLayout = {
+//   wrapperCol: {
+//     offset: 11,
+//     span: 18,
+//   },
+// };
 
 
 const Component = () => {
@@ -73,16 +72,15 @@ const Component = () => {
   });
 
   return (
-    <Wraper>
+    <Wrapper>
       <Title>用户注册</Title>
       <Form
-        {...layout}
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
-          label="用户名"
+          label="用&nbsp;&nbsp;户&nbsp;名"
           name="username"
           rules={[
             {
@@ -96,7 +94,7 @@ const Component = () => {
         </Form.Item>
 
         <Form.Item
-          label="密码"
+          label="密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码"
           name="password"
           rules={[
             {
@@ -130,13 +128,13 @@ const Component = () => {
           <Input.Password/>
         </Form.Item>
 
-        <Form.Item {...tailLayout}>
+        <Form.Item>
           <StyleButton type="primary" htmlType="submit">
             提交
           </StyleButton>
         </Form.Item>
       </Form>
-    </Wraper>
+    </Wrapper>
   );
 };
 
