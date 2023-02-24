@@ -1,7 +1,8 @@
 {
-  "name": "forest-images",
+  "name": "micrograss-images",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@ant-design/icons": "^5.0.0",
     "@babel/core": "^7.16.0",
@@ -69,6 +70,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "upload": "git init; git add .; git commit -am \"init\"; git remote add origin git@github.com:lemon1007/forest-images.git; git push -f origin master",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

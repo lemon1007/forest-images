@@ -23,22 +23,6 @@ const StyleButton = styled(Button)`
   margin-top: 15px;
 `;
 
-// const layout = {
-//   labelCol: {
-//     span: 4,
-//   },
-//   wrapperCol: {
-//     span: 18,
-//   },
-// };
-// const tailLayout = {
-//   wrapperCol: {
-//     offset: 11,
-//     span: 18,
-//   },
-// };
-
-
 const Component = () => {
 
   const navigate = useNavigate();
